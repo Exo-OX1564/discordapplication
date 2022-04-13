@@ -1,3 +1,20 @@
+import discord
+from discord.ext import commands
+from keep_alive import keep_alive
+import time
+from time import sleep
+
+client = commands.Bot(command_prefix = '%', intents = discord.Intents.all()) #Set prefix here.
+my_secret = os.environ['token'] #Setting up the token
+
+
+@client.event
+async def on_ready():
+	await client.change_presence(status=discord.Status.dnd, activity=discord.Game(name='Exo!')) #Set status here!
+	print('Connected To Discord!') #To notify it is connected!
+
+
+
 q_list = [
     '#add a question here, you may add more by using this as an array ',
     '#add another question here, etc and carry on until you\'re done with the questions you want'
@@ -33,4 +50,5 @@ async def staff_application(ctx):
             submit_msg = f'Application from {msg.author}.\nThe answers are:\n{answers}' #Feel free to add more to your likings.
             await submit_channel.send(submit_msg)
 
-
+keep_alive()
+client.run(my_secret) #Running the bot.
